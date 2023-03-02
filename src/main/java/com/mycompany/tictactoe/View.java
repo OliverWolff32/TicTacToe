@@ -22,7 +22,12 @@ public class View extends javax.swing.JFrame {
         this.whoseTurn = false;
         this.gameOver = false;
     }
+    
+    
+    
     private String isWinner() {
+        
+        
         // Get the text contents of each button.  
         // Be sure you're accessing the
         // buttons in the order you want.  
@@ -42,11 +47,14 @@ public class View extends javax.swing.JFrame {
 
         // Check the rows and columns for a tic tac toe
         for (int i = 0; i < 3; i++) {
-            if (status[i][0].equals(status[i][1]) && status[i][0].equals(status[i][2])) {
-                return status[i][0];
+            if (status[i][0].equals(status[i][1]) && 
+                status[i][0].equals(status[i][2]) && !status[i][0].equals("")) 
+            {
+                return status[i][0];//error
             }
-            if (status[0][i].equals(status[1][i]) && status[0][i].equals(status[2][i])) {
-                return status[0][i];
+            if (status[0][i].equals(status[1][i]) && 
+                status[0][i].equals(status[2][i]) && !status[0][i].equals("")) {
+                return status[0][i];//error
             }
         }
 
@@ -57,7 +65,18 @@ public class View extends javax.swing.JFrame {
         if (status[0][2].equals(status[1][1]) && status[0][2].equals(status[2][0])) {
             return status[0][2];
         }
-
+        int k=0; 
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(!status[i][j].equals("")) {
+                    k++;
+                }
+            }
+        }
+        if(k == 9) {
+            return "NOBODY"; //all squares filled and no winner already returned
+        }
+        
         // If we haven't found it, then return a blank string
         return "";
     }
